@@ -11,9 +11,13 @@
 
 /* Support arithmetic encoding */
 /* #define C_ARITH_CODING_SUPPORTED 1 */
+/* define, because was set at Android.mk and CMakeLists.txt */
+#define C_ARITH_CODING_SUPPORTED 1
 
 /* Support arithmetic decoding */
 /* #define D_ARITH_CODING_SUPPORTED 1 */
+/* define, because was set at Android.mk and CMakeLists.txt */
+#define D_ARITH_CODING_SUPPORTED 1
 
 /* Support in-memory source/destination managers */
 #define MEM_SRCDST_SUPPORTED 1
@@ -43,6 +47,8 @@
 
 /* Define if you need to include <sys/types.h> to get size_t. */
 /* #undef NEED_SYS_TYPES_H 1 */
+/* define, because was set at Android.mk and CMakeLists.txt */
+#define NEED_SYS_TYPES_H 1
 
 /* Define if you have BSD-like bzero and bcopy in <strings.h> rather than
    memset/memcpy in <string.h>. */
@@ -66,3 +72,19 @@
 
 /* Define to `unsigned int' if <sys/types.h> does not define. */
 /* #undef size_t */
+
+
+/* define following macros, because they were set at Android.mk and CMakeLists.txt */
+#define HAVE_DLFCN_H 1
+#define HAVE_INTTYPES_H 1
+#define HAVE_MEMCPY 1
+#define HAVE_MEMORY_H 1
+#define HAVE_MEMSET 1
+#define HAVE_STDINT_H 1
+#define HAVE_STRINGS_H 1
+#define HAVE_STRING_H 1
+#define HAVE_SYS_STAT_H 1
+#define HAVE_SYS_TYPES_H 1
+#define HAVE_UNISTD_H 1
+#define STDC_HEADERS 1
+
