@@ -1995,13 +1995,21 @@ DLLEXPORT unsigned char *tjLoadImage(const char *filename, int *width,
   if (*pixelFormat == TJPF_UNKNOWN) cinfo->in_color_space = JCS_UNKNOWN;
   else cinfo->in_color_space = pf2cs[*pixelFormat];
   if (tempc == 'B') {
+#ifdef BMP_SUPPORTED
     if ((src = jinit_read_bmp(cinfo, FALSE)) == NULL)
       _throwg("tjLoadImage(): Could not initialize bitmap loader");
     invert = (flags & TJFLAG_BOTTOMUP) == 0;
+#else
+    _throwg("tjLoadImage(): Could not initialize bitmap loader. BMP not supported");
+#endif
   } else if (tempc == 'P') {
+#ifdef PPM_SUPPORTED
     if ((src = jinit_read_ppm(cinfo)) == NULL)
       _throwg("tjLoadImage(): Could not initialize bitmap loader");
     invert = (flags & TJFLAG_BOTTOMUP) != 0;
+#else
+    _throwg("tjLoadImage(): Could not initialize bitmap loader. PPM not supported");
+#endif
   } else
     _throwg("tjLoadImage(): Unsupported file type");
 
@@ -2083,13 +2091,21 @@ DLLEXPORT int tjSaveImage(const char *filename, unsigned char *buffer,
 
   ptr = strrchr(filename, '.');
   if (ptr && !strcasecmp(ptr, ".bmp")) {
+#ifdef BMP_SUPPORTED
     if ((dst = jinit_write_bmp(dinfo, FALSE, FALSE)) == NULL)
       _throwg("tjSaveImage(): Could not initialize bitmap writer");
     invert = (flags & TJFLAG_BOTTOMUP) == 0;
+#else
+    _throwg("tjSaveImage(): Could not initialize bitmap writer. BMP not supported");
+#endif
   } else {
+#ifdef PPM_SUPPORTED
     if ((dst = jinit_write_ppm(dinfo)) == NULL)
       _throwg("tjSaveImage(): Could not initialize PPM writer");
     invert = (flags & TJFLAG_BOTTOMUP) != 0;
+#else
+    _throwg("tjSaveImage(): Could not initialize PPM writer. PPM not supported");
+#endif
   }
 
   dst->output_file = file;
